@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -100px;
+  font-family: 'Open Sans'; 
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 130px;
+}
+
+.forms {
+  margin: 0 8px;
+}
