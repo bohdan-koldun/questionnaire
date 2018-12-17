@@ -1,0 +1,69 @@
+@import '../../styles/colors';
+
+.checkbox-wrapper {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 14px;
+    width: 14px;
+    border-radius: 2px;
+    border: 1px solid $grey;
+    background-color: $white;
+}
+  
+&:hover input ~ .checkmark {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+  
+input:checked ~ .checkmark {
+    background-color: $blue;
+}
+  
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+.checkmark:after {
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border: solid $white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+  
+  
+
+  
+
+

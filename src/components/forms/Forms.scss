@@ -1,12 +1,31 @@
 form {
     display: flex;
     flex-direction: column;
-  //  align-items: center;
-    //justify-content: center; 
 
     h2{
         font-size: inherit;
+        font-size: inherit;
         font-weight: normal;
         text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .social-input-group{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0;
+
+        .social-input{
+            padding: 8px;
+            margin: 0;
+            min-width: 300px;
+            transition: all 0.5s ease;
+        }
+
+        .social-checkbox {
+            margin: 8px 0;
+        }
     }
 }

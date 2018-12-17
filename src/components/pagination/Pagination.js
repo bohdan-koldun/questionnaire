@@ -3,14 +3,13 @@ import './Pagination.scss';
 
 class Pagination extends Component {
     render() {
-        const { totalPages, handlerClick } = this.props;
-        const activeStep = 2;
+        const { totalPages, onClick, activeStep } = this.props;
         const buttons = [];
         for (let i = 1; i <= totalPages; i++) {
             buttons.push(
                 <button
                     className={activeStep > i ? 'available' : activeStep === i ? 'active' : ''}
-                    onClick={handlerClick}
+                    onClick={() => onClick(i)}
                     key={i}
                 >
                     {i}

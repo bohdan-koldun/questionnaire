@@ -15,7 +15,9 @@
         cursor: pointer;
         user-select: none;  
         outline: none;
-        line-height: 1.5;  
+        line-height: 1.5;
+        font-family: inherit;
+        font-size: inherit;  
         color: $grey;
 
         &:hover{

@@ -3,12 +3,12 @@ import './Button.scss';
 
 class Button extends Component {
     render() {
-        const { type, kind, handlerClick, children } = this.props;
+        const { type, kind, onClick, children } = this.props;
         return (
             <button
                 type={type}
                 className={kind === 'orange' ? 'orange-btn' : 'white-btn'}
-                onClick={handlerClick}
+                onClick={onClick}
             >
                 {children}
             </button>
