@@ -72,11 +72,18 @@ class App extends Component {
               <FaChevronLeft size='16px' style={{ marginRight: '5px' }} />
               <span>Предыдущий</span>
             </Button>
-            <Button onClick={() => this.goToForm(activeForm + 1)}>
-              <span>Следующий</span>
-              <FaChevronRight size='16px' style={{ marginLeft: '5px' }} />
-            </Button>
-          </div>}
+            {
+              activeForm !== 4 ?
+                <Button onClick={() => this.goToForm(activeForm + 1)}>
+                  <span>Следующий</span>
+                  <FaChevronRight size='16px' style={{ marginLeft: '5px' }} />
+                </Button> :
+                <Button kind='orange' onClick={() => this.goToForm(activeForm + 1)}>
+                  <span>Завершить</span>
+                </Button>
+            }
+          </div>
+        }
       </div>
     );
   }
