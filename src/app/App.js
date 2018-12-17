@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import action from '../redux/actions';
 import Button from '../components/button/Button';
 import Pagination from '../components/pagination/Pagination';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -12,17 +15,25 @@ class App extends Component {
   state = { activeForm: 1 }
 
   getActiveForm = () => {
+    const {
+      name,
+      email,
+      country,
+      city,
+      socialNetworks,
+      catImage,
+      addNameEmail } = this.props;
     const { activeForm } = this.state;
 
     switch (activeForm) {
       case 1:
-        return <NameEmailForm />
+        return <NameEmailForm name={name} email={email} action={addNameEmail}/>
       case 2:
-        return <LocationForm />
+        return <LocationForm country={country} city={city}/>
       case 3:
-        return <SocialProfileForm />
+        return <SocialProfileForm socialNetworks={socialNetworks}/>
       case 4:
-        return <CatForm />
+        return <CatForm catImage={catImage}/>
       default:
         return <NameEmailForm />
     }
@@ -58,4 +69,20 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    name: state.NameEmail.name,
+    email: state.NameEmail.email,
+    country: state.Location.country,
+    city: state.Location.city,
+    socialNetworks: state.Location.SocialNetworks,
+    catImage: state.CatImage
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(action, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
