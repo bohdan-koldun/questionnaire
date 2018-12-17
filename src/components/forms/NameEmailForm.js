@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from '../input/Input';
+import { validateEmail, validateName } from '../../services/validation';
 import './Forms.scss';
 
 class NameEmailForm extends Component {
@@ -14,22 +15,31 @@ class NameEmailForm extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        this.setState({ [name]: value });
 
-        this.sendToStore();
+        if (name === 'email' && validateEmail(value)) {
+            this.setState({ validEmail: true });
+            this.sendToStore();
+        }
+        else
+            this.setState({ validEmail: false });
+
+        if (name === 'name' && validateName(value)) {
+            this.setState({ validName: true });
+            this.sendToStore();
+        }
+        else
+            this.setState({ validName: false });
     }
 
     sendToStore = () => {
-        console.log('sdfsd');
         const { action } = this.props;
-        const { name, email } = this.state;
-        action (name, email);
+        const { name, email, validName, validEmail } = this.state;
+        action(name, email);
     }
 
     render() {
-        const { name, email } = this.state;
+        const { name, email, validName, validEmail } = this.state;
         return (
             <form>
                 <h2>1. Введите имя и e-mail</h2>
@@ -37,11 +47,13 @@ class NameEmailForm extends Component {
                     name='name'
                     value={name}
                     placeholder='Имя'
+                    error={validName === false ? 'Имя должно состоять из букв латинского или русского алфавита' : ''}
                     onChange={this.handleInputChange}
                 />
                 <Input
                     name='email'
                     type='email'
+                    error={validEmail === false ? 'Неправильный email' : ''}
                     value={email}
                     placeholder='e-mail'
                     onChange={this.handleInputChange}

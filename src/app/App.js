@@ -9,6 +9,7 @@ import NameEmailForm from '../components/forms/NameEmailForm';
 import LocationForm from '../components/forms/LocationForm';
 import SocialProfileForm from '../components/forms/SocialProfileForm';
 import CatForm from '../components/forms/CatForm';
+import FinalScreen from '../components/cards/finalScreen';
 import './App.scss';
 
 class App extends Component {
@@ -27,20 +28,22 @@ class App extends Component {
 
     switch (activeForm) {
       case 1:
-        return <NameEmailForm name={name} email={email} action={addNameEmail}/>
+        return <NameEmailForm name={name} email={email} action={addNameEmail} />
       case 2:
-        return <LocationForm country={country} city={city}/>
+        return <LocationForm country={country} city={city} />
       case 3:
-        return <SocialProfileForm socialNetworks={socialNetworks}/>
+        return <SocialProfileForm socialNetworks={socialNetworks} />
       case 4:
-        return <CatForm catImage={catImage}/>
+        return <CatForm catImage={catImage} />
+      case 5:
+        return <FinalScreen  {...this.props} />
       default:
         return <NameEmailForm />
     }
   }
 
   goToForm = (index) => {
-    if (index >= 1 && index <= 4)
+    if (index >= 1 && index <= 5)
       this.setState({ activeForm: index });
   }
 
@@ -50,20 +53,25 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Pagination totalPages={4} activeStep={activeForm} onClick={this.goToForm} />
+        {
+          activeForm !== 5 &&
+          <Pagination totalPages={4} activeStep={activeForm} onClick={this.goToForm} />
+        }
         <div className='forms'>
           {this.getActiveForm()}
         </div>
-        <div className='buttons'>
-          <Button onClick={() => this.goToForm(activeForm - 1)}>
-            <FaChevronLeft size='16px' style={{ marginRight: '5px' }} />
-            <span>Предыдущий</span>
-          </Button>
-          <Button onClick={() => this.goToForm(activeForm + 1)}>
-            <span>Следующий</span>
-            <FaChevronRight size='16px' style={{ marginLeft: '5px' }} />
-          </Button>
-        </div>
+        {
+          activeForm !== 5 &&
+          <div className='buttons'>
+            <Button onClick={() => this.goToForm(activeForm - 1)}>
+              <FaChevronLeft size='16px' style={{ marginRight: '5px' }} />
+              <span>Предыдущий</span>
+            </Button>
+            <Button onClick={() => this.goToForm(activeForm + 1)}>
+              <span>Следующий</span>
+              <FaChevronRight size='16px' style={{ marginLeft: '5px' }} />
+            </Button>
+          </div>}
       </div>
     );
   }

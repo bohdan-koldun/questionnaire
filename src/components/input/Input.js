@@ -14,6 +14,7 @@ class Input extends Component {
                     placeholder={placeholder}
                     className={className}
                 />
+                {error.length > 0 && <span className='error'>{error}</span>}
             </div>
         );
     }
