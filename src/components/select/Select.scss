@@ -30,16 +30,16 @@
 
     .select-dropdown {
       position: absolute;
-      visibility: hidden;
       background-color: $white;
       width: 100%;
       overflow: auto;
-      margin: 4px 8px;
+      margin: 4px 8px 0;
       border-radius: 2px;
       padding: 16px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
       z-index: 1;
       transition: opacity 0.2s ease;
+      max-height: 300px;
     }
 
     .select-dropdown span {
@@ -53,8 +53,4 @@
    span:hover {
      background-color: $grey;
   }
-
-   .show{
-    visibility: visible;
-   }
   }

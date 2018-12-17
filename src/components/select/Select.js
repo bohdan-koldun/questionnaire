@@ -5,57 +5,54 @@ class Select extends Component {
     state = { showDropdown: false }
 
     handlerClick = (event) => {
-        this.setState({ showDropdown: true });
+        this.setState({ showDropdown: true});
     }
 
     setWrapperRef = (node) => {
         this.inputRef = node;
     }
 
-
     handleClickOutside = (event) => {
-        if (this.inputRef && !this.inputRef.contains(event.target)) {
-            this.setState({ showDropdown: false })
+       if (this.inputRef && !this.inputRef.contains(event.target)) {
+               this.setState({ showDropdown: false });
         }
     }
 
-    handleChoose = (option) => {
-        if (this.inputRef) {
-            this.inputRef.value = option;
-        }
+    handleChoose = (key) => {
+        this.props.onChange(key);
+        this.setState({ showDropdown: false });
     }
 
     componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
+      document.addEventListener('mousedown', this.handleClickOutside);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     render() {
-        const { name, label, options, search, selectedValue, onChange } = this.props;
-        const { showDropdown } = this.state;
-        const listOption = options.map((option, index) => {
-            return <span onClick={() => this.handleChoose(option)} key={option} >{option}</span>;
-        });
-
-
+        const { name, label, options, search, onChange, selectedKey} = this.props;
+        const { showDropdown} = this.state;
+     
         return (
-            <div className='select'>
+            <div className='select' ref={this.setWrapperRef}>
                 <input
                     type='text'
                     name={name}
-                    value={selectedValue}
+                    value={options[selectedKey] ? options[selectedKey] : ''}
                     placeholder={label}
                     onClick={this.handlerClick}
-                    onChange={onChange}
+                    onChange={() => onChange(selectedKey)}
                     autoComplete='off'
-                    ref={this.setWrapperRef}
-                    readOnly={!!search}
+                    readOnly={!search}
                 />
-                <div className={showDropdown ? 'select-dropdown show' : 'select-dropdown'}>
-                    {listOption}
+                <div className='select-dropdown' style={{display: showDropdown ? 'block' : 'none'}}>
+                     {
+                         Object.keys(options).map( (key) => {
+                            return <span onClick={() => this.handleChoose(key)} key={options[key]} >{options[key]}</span>;
+                         })
+                     }
                 </div>
             </div>
         );
@@ -64,7 +61,7 @@ class Select extends Component {
 
 Select.defaultProps = {
     options: [],
-    search: true
+    search: false
 };
 
 export default Select;
