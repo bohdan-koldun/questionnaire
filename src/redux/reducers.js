@@ -10,7 +10,16 @@ const initialState = {
     country: '',
     city: ''
   },
-  socialNetworks: {},
+  socialNetworks: {
+    facebook: '',
+    isFacebook: false,
+    vkontakte: '',
+    isVkontakte: false,
+    twitter: '',
+    isTwitter: false,
+    odnoklassniki: '',
+    isOdnoklassniki: false
+  },
   catImage: '',
 
 };

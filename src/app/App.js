@@ -24,16 +24,18 @@ class App extends Component {
       socialNetworks,
       catImage,
       addNameEmail,
-      addCatImage } = this.props;
+      addCatImage,
+      addSocialNetworks,
+      addLocation} = this.props;
     const { activeForm } = this.state;
 
     switch (activeForm) {
       case 1:
         return <NameEmailForm name={name} email={email} action={addNameEmail} />
       case 2:
-        return <LocationForm country={country} city={city} />
+        return <LocationForm country={country} city={city} action={addLocation}/>
       case 3:
-        return <SocialProfileForm socialNetworks={socialNetworks} />
+        return <SocialProfileForm socialNetworks={socialNetworks} action={addSocialNetworks} />
       case 4:
         return <CatForm catImage={catImage} action={addCatImage} />
       case 5:
@@ -96,7 +98,7 @@ function mapStateToProps(state) {
     email: state.NameEmail.email,
     country: state.Location.country,
     city: state.Location.city,
-    socialNetworks: state.Location.SocialNetworks,
+    socialNetworks: state.SocialNetworks,
     catImage: state.CatImage
   };
 }

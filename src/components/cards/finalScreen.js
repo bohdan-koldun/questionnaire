@@ -11,8 +11,7 @@ class FinalScreen extends Component {
             city,
             socialNetworks,
             catImage,
-            goOverAgain
-        } = this.props;
+            goOverAgain } = this.props;
 
         return (
             <div className='card'>
@@ -20,10 +19,12 @@ class FinalScreen extends Component {
                     <div>
                         <h1>{name}</h1>
                         <p>{email}</p>
-                        <p className='location'>country, city</p>
+                        <p className='location'>{country}, {city}</p>
                         <div className='social-networks'>
-                            <p><span>Facebook:</span> fb.com/ffffdfd</p>
-                            <p><span>Twitter:</span> twitter.com/ffffdfd</p>
+                          { socialNetworks.isFacebook && <p><span>Facebook:</span>{socialNetworks.facebook}</p> }
+                          { socialNetworks.isVkontakte && <p><span>Вконтакте:</span>{socialNetworks.vkontakte}</p> }
+                          { socialNetworks.isTwitter && <p><span>Twitter:</span>{socialNetworks.twitter}</p> }
+                          { socialNetworks.isOdnoklassniki && <p><span>Одноклассники:</span>{socialNetworks.odnoklassniki}</p> }
                         </div>
                     </div>
                     <img src={catImage} alt='Котик' />

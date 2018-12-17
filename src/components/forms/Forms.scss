@@ -21,11 +21,16 @@ form {
             padding: 8px;
             margin: 0;
             min-width: 300px;
+            display: none;
             transition: all 0.5s ease;
         }
 
         .social-checkbox {
             margin: 8px 0;
+        }
+
+        .show {
+            display: flex;
         }
     }
 }

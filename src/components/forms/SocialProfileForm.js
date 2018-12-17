@@ -4,15 +4,10 @@ import Input from 'components/input/Input';
 import './Forms.scss';
 
 class SocialProfileForm extends Component {
-    state = {
-        facebook: '',
-        facebookCheckBox: false,
-        vkontakte: '',
-        vkontakteCheckBox: false,
-        twitter: '',
-        twitterCheckBox: false,
-        odnoklassniki: '',
-        odnoklassnikiCheckBox: false
+    constructor(props) {
+        super(props);
+        const { socialNetworks } = this.props;
+        this.state = { ...socialNetworks };
     }
 
     handleInputChange = (event) => {
@@ -25,16 +20,21 @@ class SocialProfileForm extends Component {
         });
     }
 
+    componentDidUpdate() {
+        const { action } = this.props;
+        action(this.state);
+    }
+
     render() {
         const {
             facebook,
-            facebookCheckBox,
+            isFacebook,
             vkontakte,
-            vkontakteCheckBox,
+            isVkontakte,
             twitter,
-            twitterCheckBox,
+            isTwitter,
             odnoklassniki,
-            odnoklassnikiCheckBox
+            isOdnoklassniki
         } = this.state;
 
         return (
@@ -42,79 +42,71 @@ class SocialProfileForm extends Component {
                 <h2>3. Отметьте социальные сети</h2>
                 <div className='social-input-group'>
                     <CheckBox
-                        name='facebookCheckBox'
+                        name='isFacebook'
                         label='Facebook'
-                        checked={facebookCheckBox}
+                        checked={isFacebook}
                         onChange={this.handleInputChange}
                         className='social-checkbox'
                     />
-                    {
-                        facebookCheckBox &&
-                        <Input
-                            name='facebook'
-                            value={facebook}
-                            placeholder='Facebook'
-                            onChange={this.handleInputChange}
-                            className='social-input'
-                        />
-                    }
+                    <Input
+                        name='facebook'
+                        value={facebook}
+                        placeholder='Facebook'
+                        error=''
+                        onChange={this.handleInputChange}
+                        className={isFacebook ? 'social-input show' : 'social-input'}
+                    />
                 </div>
                 <div className='social-input-group'>
                     <CheckBox
-                        name='vkontakteCheckBox'
+                        name='isVkontakte'
                         label='Вконтакте'
-                        checked={vkontakteCheckBox}
+                        checked={isVkontakte}
                         onChange={this.handleInputChange}
                         className='social-checkbox'
                     />
-                    {
-                        vkontakteCheckBox &&
-                        <Input
-                            name='vkontakte'
-                            value={vkontakte}
-                            placeholder='Вконтакте'
-                            onChange={this.handleInputChange}
-                            className='social-input'
-                        />
-                    }
+                    <Input
+                        name='vkontakte'
+                        value={vkontakte}
+                        placeholder='Вконтакте'
+                        error=''
+                        onChange={this.handleInputChange}
+                        className={isVkontakte ? 'social-input show' : 'social-input'}
+                    />  
                 </div>
                 <div className='social-input-group'>
                     <CheckBox
-                        name='twitterCheckBox'
+                        name='isTwitter'
                         label='Twitter'
-                        checked={twitterCheckBox}
+                        checked={isTwitter}
                         onChange={this.handleInputChange}
                         className='social-checkbox'
                     />
-                    {
-                        twitterCheckBox &&
-                        <Input
-                            name='twitter'
-                            value={twitter}
-                            placeholder='Twitter'
-                            onChange={this.handleInputChange}
-                            className='social-input'
-                        />
-                    }
+                    <Input
+                        name='twitter'
+                        value={twitter}
+                        placeholder='Twitter'
+                        error=''
+                        onChange={this.handleInputChange}
+                        className={isTwitter ? 'social-input show' : 'social-input'}
+                    />
                 </div>
                 <div className='social-input-group'>
                     <CheckBox
-                        name='odnoklassnikiCheckBox'
+                        name='isOdnoklassniki'
                         label='Одноклассники'
-                        checked={odnoklassnikiCheckBox}
+                        checked={isOdnoklassniki}
                         onChange={this.handleInputChange}
                         className='social-checkbox'
                     />
-                    {
-                        odnoklassnikiCheckBox &&
-                        <Input
-                            name='odnoklassniki'
-                            value={odnoklassniki}
-                            placeholder='Одноклассники'
-                            onChange={this.handleInputChange}
-                            className='social-input'
-                        />
-                    }
+                     <Input
+                        name='odnoklassniki'
+                        value={odnoklassniki}
+                        placeholder='Одноклассники'
+                        error=''
+                        onChange={this.handleInputChange}
+                        className={isOdnoklassniki ? 'social-input show' : 'social-input'}
+                    />
                 </div>
             </form>
         );
