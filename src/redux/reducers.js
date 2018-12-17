@@ -53,9 +53,19 @@ const CatImage = (state = initialState.catImage, action) => {
 };
 
 
-export default combineReducers({
+const appReducer =  combineReducers({
   NameEmail,
   Location,
   SocialNetworks,
   CatImage
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === Types.GO_OVER_AGAIN) {
+    state = initialState;
+  }
+
+  return appReducer(state, action)
+}
+
+export default rootReducer;

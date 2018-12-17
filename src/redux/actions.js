@@ -15,5 +15,9 @@ export default {
 
   addCatImage: (image) => {
     return { type: Types.ADD_CAT_IMAGE, payload: image };
+  },
+
+  clearStore: () => {
+    return { type: Types.GO_OVER_AGAIN };
   }
 }

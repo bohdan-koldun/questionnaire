@@ -36,7 +36,7 @@ class App extends Component {
       case 4:
         return <CatForm catImage={catImage} />
       case 5:
-        return <FinalScreen  {...this.props} />
+        return <FinalScreen  {...this.props} goOverAgain={this.goOverAgain} />
       default:
         return <NameEmailForm />
     }
@@ -45,6 +45,11 @@ class App extends Component {
   goToForm = (index) => {
     if (index >= 1 && index <= 5)
       this.setState({ activeForm: index });
+  }
+
+  goOverAgain = () => {
+    this.props.clearStore();
+    this.setState({ activeForm: 1 });
   }
 
 

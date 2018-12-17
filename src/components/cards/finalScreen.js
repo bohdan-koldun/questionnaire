@@ -11,7 +11,8 @@ class FinalScreen extends Component {
             country,
             city,
             socialNetworks,
-            catImage
+            catImage,
+            goOverAgain
         } = this.props;
 
         return (
@@ -28,7 +29,7 @@ class FinalScreen extends Component {
                     </div>
                     <img src={logo} alt='' />
                 </div>
-                <Button kind='orange'>
+                <Button kind='orange' onClick={goOverAgain}>
                     <span>Пройти заново</span>
                 </Button>
             </div>
