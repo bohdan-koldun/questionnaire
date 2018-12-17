@@ -17,26 +17,20 @@ class NameEmailForm extends Component {
 
         this.setState({ [name]: value });
 
-        if (name === 'email' && validateEmail(value)) {
-            this.setState({ validEmail: true });
-            this.addNameEmailToStore();
-        }
-        else
-            this.setState({ validEmail: false });
-
-        if (name === 'name' && validateName(value)) {
-            this.setState({ validName: true });
-            this.addNameEmailToStore();
-        }
-        else
-            this.setState({ validName: false });
+        if (name === 'email')
+            this.setState({ validEmail: validateEmail(value) });
+    
+        if (name === 'name') 
+            this.setState({ validName: validateName(value) });
     }
 
-    addNameEmailToStore = () => {
+    componentDidUpdate() {
         const { action } = this.props;
         const { name, email, validName, validEmail } = this.state;
-        action(name, email);
+        if(validName && validEmail)
+            action(name, email);
     }
+  
 
     render() {
         const { name, email, validName, validEmail } = this.state;
