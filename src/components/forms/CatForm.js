@@ -10,7 +10,11 @@ const imageList = [
 ]
 
 class CatForm extends Component {
-    state={ selectedImage: '' }
+    constructor(props) {
+        super(props);
+        const { catImage } = this.props;
+        this.state = { selectedImage: catImage };
+    }
 
     handleImageClick = (imageSrc, kindOfPet) => {
         this.setState({
@@ -38,7 +42,7 @@ class CatForm extends Component {
                     onClick={this.handleImageClick}
                 />
                 {
-                    !isCat && selectedImage !== '' &&
+                    isCat === false && selectedImage !== '' &&
                     <span className='error'>Это {kindOfPet}! А нужен котик! Выберите котика.</span>
                 }
             </form>
