@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Select.scss';
 
 class Select extends Component {
-    state = { showDropdown: false, selectedValue: '' }
+    state = { showDropdown: false }
 
     handlerClick = (event) => {
         this.setState({ showDropdown: true });
@@ -20,18 +20,9 @@ class Select extends Component {
     }
 
     handleChoose = (option) => {
-        console.log(this)
-        this.setState({
-            selectedValue: option
-        });
-    }
-
-    handleInputChange = (event) => {
-        const value = event.target.value;
-
-        this.setState({
-            selectedValue: value
-        });
+        if (this.inputRef) {
+            this.inputRef.value = option;
+        }
     }
 
     componentDidMount() {
@@ -43,8 +34,8 @@ class Select extends Component {
     }
 
     render() {
-        const { name, options } = this.props;
-        const { showDropdown, selectedValue } = this.state;
+        const { name, label, options, search, selectedValue, onChange } = this.props;
+        const { showDropdown } = this.state;
         const listOption = options.map((option, index) => {
             return <span onClick={() => this.handleChoose(option)} key={option} >{option}</span>;
         });
@@ -54,24 +45,26 @@ class Select extends Component {
             <div className='select'>
                 <input
                     type='text'
+                    name={name}
                     value={selectedValue}
-                    placeholder={name}
+                    placeholder={label}
                     onClick={this.handlerClick}
-                    onChange={this.handleInputChange}
+                    onChange={onChange}
+                    autoComplete='off'
                     ref={this.setWrapperRef}
+                    readOnly={!!search}
                 />
-                {
-                    <div className={showDropdown ? 'select-dropdown show' : 'select-dropdown'}>
-                        {listOption}
-                    </div>
-                }
+                <div className={showDropdown ? 'select-dropdown show' : 'select-dropdown'}>
+                    {listOption}
+                </div>
             </div>
         );
     }
 }
 
 Select.defaultProps = {
-    options: []
+    options: [],
+    search: true
 };
 
 export default Select;
