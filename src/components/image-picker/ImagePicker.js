@@ -3,16 +3,21 @@ import './ImagePicker.scss';
 
 class ImagePicker extends Component {
     render() {
-        const { imageSrcList } = this.props;
+        const { imageSrcList, selectedImage, onClick } = this.props;
         return (
             <div className='image-picker'>
-           {
-               imageSrcList.map( image => {
-                   const src = require(image.src);
-                   return <img src={src} alt={image.kindOfPet} />
-               }
-               )
-           }
+            {
+               imageSrcList.map( (image, index) => {
+                   const { imageSrc, kindOfPet} = image;
+                   return <img
+                     src={imageSrc} 
+                     alt={kindOfPet} 
+                     key={imageSrc}
+                     className={imageSrc === selectedImage ? 'active' : ''}
+                     onClick={() => onClick(imageSrc, kindOfPet)}
+                   />
+               })
+            }
             </div>
         );
     }

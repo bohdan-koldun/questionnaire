@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Input from '../input/Input';
-import { validateEmail, validateName } from '../../services/validation';
+import Input from 'components/input/Input';
+import { validateEmail, validateName } from 'services/validation';
 import './Forms.scss';
 
 class NameEmailForm extends Component {
@@ -19,20 +19,20 @@ class NameEmailForm extends Component {
 
         if (name === 'email' && validateEmail(value)) {
             this.setState({ validEmail: true });
-            this.sendToStore();
+            this.addNameEmailToStore();
         }
         else
             this.setState({ validEmail: false });
 
         if (name === 'name' && validateName(value)) {
             this.setState({ validName: true });
-            this.sendToStore();
+            this.addNameEmailToStore();
         }
         else
             this.setState({ validName: false });
     }
 
-    sendToStore = () => {
+    addNameEmailToStore = () => {
         const { action } = this.props;
         const { name, email, validName, validEmail } = this.state;
         action(name, email);

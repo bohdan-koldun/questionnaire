@@ -1,7 +1,14 @@
+@import '../../styles/colors';
 
 .image-picker {
     img {
         width: 150px;
         height: 150px;
+        margin: 8px;
+        border-radius: 2px;
     }  
+
+    .active {
+        border: 3px solid $orange;
+    }
 }

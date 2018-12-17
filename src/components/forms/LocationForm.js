@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Select from '../select/Select';
-import Countries from '../../assets/json/countries.json';
-import Cities from '../../assets/json/cities.json';
+import Select from 'components/select/Select';
+import Countries from 'assets/json/countries.json';
+import Cities from 'assets/json/cities.json';
 import './Forms.scss';
 
 class LocationForm extends Component {

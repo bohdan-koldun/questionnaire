@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CheckBox from '../checkbox/CheckBox';
-import Input from '../input/Input';
+import CheckBox from 'components/checkbox/CheckBox';
+import Input from 'components/input/Input';
 import './Forms.scss';
 
 class SocialProfileForm extends Component {

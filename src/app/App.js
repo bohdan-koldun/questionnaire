@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import action from '../redux/actions';
-import Button from '../components/button/Button';
-import Pagination from '../components/pagination/Pagination';
+import action from 'redux/actions';
+import Button from 'components/button/Button';
+import Pagination from 'components/pagination/Pagination';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import NameEmailForm from '../components/forms/NameEmailForm';
-import LocationForm from '../components/forms/LocationForm';
-import SocialProfileForm from '../components/forms/SocialProfileForm';
-import CatForm from '../components/forms/CatForm';
-import FinalScreen from '../components/cards/finalScreen';
+import NameEmailForm from 'components/forms/NameEmailForm';
+import LocationForm from 'components/forms/LocationForm';
+import SocialProfileForm from 'components/forms/SocialProfileForm';
+import CatForm from 'components/forms/CatForm';
+import FinalScreen from 'components/cards/finalScreen';
 import './App.scss';
 
 class App extends Component {
@@ -23,7 +23,8 @@ class App extends Component {
       city,
       socialNetworks,
       catImage,
-      addNameEmail } = this.props;
+      addNameEmail,
+      addCatImage } = this.props;
     const { activeForm } = this.state;
 
     switch (activeForm) {
@@ -34,7 +35,7 @@ class App extends Component {
       case 3:
         return <SocialProfileForm socialNetworks={socialNetworks} />
       case 4:
-        return <CatForm catImage={catImage} />
+        return <CatForm catImage={catImage} action={addCatImage} />
       case 5:
         return <FinalScreen  {...this.props} goOverAgain={this.goOverAgain} />
       default:
