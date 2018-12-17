@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '.././../assets/pictures/cat1.jpg';
 import Button from '../button/Button';
 import './Cards.scss';
 
@@ -15,6 +14,8 @@ class FinalScreen extends Component {
             goOverAgain
         } = this.props;
 
+        const image = require('assets/pictures/cat1.jpg');
+
         return (
             <div className='card'>
                 <div className='final-card-wrapper'>
@@ -27,7 +28,7 @@ class FinalScreen extends Component {
                             <p><span>Twitter:</span> twitter.com/ffffdfd</p>
                         </div>
                     </div>
-                    <img src={logo} alt='' />
+                    <img src={image} alt='Котик' />
                 </div>
                 <Button kind='orange' onClick={goOverAgain}>
                     <span>Пройти заново</span>
