@@ -15,7 +15,7 @@ class ImagePicker extends Component {
                      key={imageSrc}
                      className={imageSrc === selectedImage ? 'active' : ''}
                      onClick={() => onClick(imageSrc, kindOfPet)}
-                   />
+                     />
                })
             }
             </div>
