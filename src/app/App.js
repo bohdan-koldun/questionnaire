@@ -13,7 +13,7 @@ import FinalScreen from 'components/cards/finalScreen';
 import './App.scss';
 
 class App extends Component {
-  state = { activeForm: 1 }
+  state = { activeForm: 1, counterClickNextForm: 0 }
 
   getActiveForm = () => {
     const {
@@ -42,20 +42,20 @@ class App extends Component {
       case 5:
         return <FinalScreen  {...this.props} goOverAgain={this.goOverAgain} />
       default:
-        return <NameEmailForm />
+        return <NameEmailForm name={name} email={email} action={addNameEmail} addIsValidatedForm={addIsValidatedForm}/>
     }
   }
 
   goToForm = (index) => {
     const { forms } = this.props;
-    const { activeForm } = this.state;
+    const { activeForm, counterClickNextForm } = this.state;
     const isAForm = index >= 1 && index <= 5;
 
     if( isAForm && 
         (activeForm >= index || 
           (forms[activeForm] && (activeForm + 1 === index || forms[index] || forms[index-1])))) {
             this.setState({ activeForm: index });
-          }
+    }
   }
 
   goOverAgain = () => {

@@ -17,6 +17,7 @@ class LocationForm extends Component {
             city: city, 
             cityKey: cityKey, 
             filteredCities: this.filterCities(countryKey),
+            error: false
         };
     }
 
@@ -26,8 +27,13 @@ class LocationForm extends Component {
             countryKey: key
         });
 
-        if(key)
+        if(key) {
            this.setState({filteredCities: this.filterCities(key)});
+           this.setState({
+             city: '',
+             cityKey: ''
+        });
+        }
     }
 
     onChangeCity = (key) => {
@@ -49,22 +55,23 @@ class LocationForm extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { country, city} = this.state;
+        const { country, city, filteredCities} = this.state;
         const { action, addIsValidatedForm } = this.props;
-
         if(prevState.country !== country || prevState.city !== city) {
-            if(country && city) {
+            if(country && (city || Object.keys(filteredCities).length === 0 )) {
                 action(country, city);
                 addIsValidatedForm({2: true});
+                this.setState({error: false});
             } else {
                 addIsValidatedForm({2: false});
+                this.setState({error: true});
             }   
         }   
     }
   
 
     render() {
-        const { countryKey, cityKey, filteredCities } = this.state;
+        const { countryKey, cityKey, filteredCities, error } = this.state;
         return (
             <form>
                 <h2>2. Выберите страну и город</h2>
@@ -80,9 +87,9 @@ class LocationForm extends Component {
                     label='Город'
                     selectedKey={cityKey}
                     options={filteredCities}
-                    search={true}
                     onChange={this.onChangeCity}
                 />
+                {error && <p className='error'>Нужно выбрать страну и если есть - город!</p>}
             </form>
         );
     }

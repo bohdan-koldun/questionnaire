@@ -51,7 +51,7 @@ class CatForm extends Component {
                 />
                 {
                     isCat === false && selectedImage !== '' &&
-                    <p className='error cat-form-error'>Это {kindOfPet}! А нужен котик! Выберите котика.</p>
+                    <p className='error'>Это {kindOfPet}! А нужен котик! Выберите котика.</p>
                 }
             </form>
         );
