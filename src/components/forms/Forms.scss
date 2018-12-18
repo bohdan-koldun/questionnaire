@@ -1,23 +1,38 @@
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 
     h2{
         font-size: inherit;
         font-size: inherit;
         font-weight: normal;
         text-align: left;
-        margin-bottom: 30px;
+        margin: 16px 8px 30px;
+        width: inherit;
+    }
+
+    .input-wrapper {
+        width: inherit;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .social-input-group{
         display: flex;
         flex-direction: row;
+        justify-content: space;
         align-items: center;
-        justify-content: space-between;
+        width: inherit;
+        justify-content: space-evenly;
         margin: 10px 0;
 
         .social-input{
+            display: flex;
             padding: 8px;
             margin: 0;
             min-width: 300px;
@@ -26,11 +41,24 @@ form {
         }
 
         .social-checkbox {
-            margin: 8px 0;
+            margin: 8px 30px 8px 0;
+            width: 170px;
         }
 
         .show {
             display: flex;
         }
     }
+
+    @media screen and (max-width: 600px) {
+        .social-input-group {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            .social-input {
+                margin: 8px 0;
+            }
+        }
+    }
+    
 }

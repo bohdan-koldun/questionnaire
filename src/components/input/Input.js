@@ -4,6 +4,9 @@ import './Input.scss';
 class Input extends Component {
     render() {
         const { type, value, name, error, placeholder, onChange, className } = this.props;
+        const isError = error.length > 0;
+        const classInput = isError ?  (!className ? 'input-error' : 'input-error ' + className) : className;
+
         return (
             <div className='input-wrapper'>
                 <input
@@ -12,9 +15,9 @@ class Input extends Component {
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
-                    className={className}
+                    className={classInput}
                 />
-                {error.length > 0 && <span className='error'>{error}</span>}
+                {isError && <span className='error'>{error}</span>}
             </div>
         );
     }
