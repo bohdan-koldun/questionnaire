@@ -27,6 +27,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "homepage": "https://bohdan-koldun.github.io/questionnaire/",
   "devDependencies": {
     "json-loader": "^0.5.7"
   }
