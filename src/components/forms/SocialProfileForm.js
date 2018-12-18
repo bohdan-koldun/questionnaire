@@ -7,7 +7,7 @@ class SocialProfileForm extends Component {
     constructor(props) {
         super(props);
         const { socialNetworks } = this.props;
-        this.state = { ...socialNetworks };
+        this.state = { ...socialNetworks, error: false };
     }
 
     handleInputChange = (event) => {
@@ -25,11 +25,28 @@ class SocialProfileForm extends Component {
         const { action, addIsValidatedForm } = this.props;
 
         if(JSON.stringify(this.state) !== JSON.stringify(prevState)) {
-            if(this.state) {
+            const {
+                facebook,
+                isFacebook,
+                vkontakte,
+                isVkontakte,
+                twitter,
+                isTwitter,
+                odnoklassniki,
+                isOdnoklassniki,
+                error
+            } = this.state;
+
+            if( facebook && isFacebook ||
+                vkontakte && isVkontakte ||
+                twitter && isTwitter ||
+                odnoklassniki && isOdnoklassniki) {
                 action(this.state);
                 addIsValidatedForm({3: true});
+                this.setState({error: false});
             } else {
                 addIsValidatedForm({3: false});
+                this.setState({error: true});
             }   
         }   
     }
@@ -44,7 +61,8 @@ class SocialProfileForm extends Component {
             twitter,
             isTwitter,
             odnoklassniki,
-            isOdnoklassniki
+            isOdnoklassniki,
+            error
         } = this.state;
 
         return (
@@ -118,6 +136,7 @@ class SocialProfileForm extends Component {
                         className={isOdnoklassniki ? 'social-input show' : 'social-input'}
                     />
                 </div>
+                {error && <p className='error'>Выберите и вкажите хотя бы одну соцсеть!</p>}
             </form>
         );
     }
