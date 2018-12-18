@@ -22,7 +22,6 @@ class SocialProfileForm extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-        const { country, city} = this.state;
         const { action, addIsValidatedForm } = this.props;
 
         if(JSON.stringify(this.state) !== JSON.stringify(prevState)) {

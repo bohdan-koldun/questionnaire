@@ -88,7 +88,7 @@ const appReducer =  combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === Types.GO_OVER_AGAIN) {
-    state = initialState;
+    state = undefined;
   }
 
   return appReducer(state, action)

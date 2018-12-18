@@ -47,7 +47,7 @@ class Select extends Component {
                     autoComplete='off'
                     readOnly={!search}
                 />
-                <div className='select-dropdown' style={{display: showDropdown ? 'block' : 'none'}}>
+                <div className='select-dropdown' style={{display: showDropdown ? 'flex' : 'none'}}>
                      {
                          Object.keys(options).map( (key) => {
                             return <span onClick={() => this.handleChoose(key)} key={options[key]} >{options[key]}</span>;

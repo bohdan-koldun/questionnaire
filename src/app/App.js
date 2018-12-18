@@ -49,9 +49,13 @@ class App extends Component {
   goToForm = (index) => {
     const { forms } = this.props;
     const { activeForm } = this.state;
+    const isAForm = index >= 1 && index <= 5;
 
-    if( forms[activeForm] && activeForm + 1 === index && index >= 1 && index <= 5)
-      this.setState({ activeForm: index });
+    if( isAForm && 
+        (activeForm >= index || 
+          (forms[activeForm] && (activeForm + 1 === index || forms[index] )))) {
+            this.setState({ activeForm: index });
+          }
   }
 
   goOverAgain = () => {

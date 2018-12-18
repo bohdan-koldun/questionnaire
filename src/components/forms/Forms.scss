@@ -29,13 +29,12 @@ form {
         align-items: center;
         width: inherit;
         justify-content: space-evenly;
-        margin: 10px 0;
+        margin: 10px 5px;
 
         .social-input{
             display: flex;
             padding: 8px;
             margin: 0;
-            min-width: 300px;
             display: none;
             transition: all 0.5s ease;
         }

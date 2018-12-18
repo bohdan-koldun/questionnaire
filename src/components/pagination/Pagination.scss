@@ -27,12 +27,13 @@
         }
     }
 
-
+    .available{
+        color: $orange;
+    }
+    
     .active {
         color: $black;
     }
 
-    .available{
-        color: $orange;
-    }
+ 
 }

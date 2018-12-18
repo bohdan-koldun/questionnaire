@@ -2,7 +2,7 @@
 
 .select {
     position: relative;
-    display: inline-block;
+    display: flex;
     margin: 8px 0;
     width: 100%;
     
@@ -30,11 +30,14 @@
 
     .select-dropdown {
       position: absolute;
+      flex-wrap: wrap;
       background-color: $white;
-      width: 100%;
       overflow: auto;
       margin: 4px 8px 0;
       border-radius: 2px;
+      top: 53px;
+      left: 0;
+      right: 0;
       padding: 16px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
       z-index: 1;
@@ -43,6 +46,8 @@
     }
 
     .select-dropdown span {
+      display: flex;
+      width: 100%;
       color: black;
       padding: 12px 16px;
       text-decoration: none;
