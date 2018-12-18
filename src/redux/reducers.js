@@ -21,6 +21,12 @@ const initialState = {
     isOdnoklassniki: false
   },
   catImage: '',
+  forms: {
+    1:  false,
+    2:  false,
+    3:  false,
+    4:  false,
+  }
 
 };
 
@@ -61,12 +67,23 @@ const CatImage = (state = initialState.catImage, action) => {
   }
 };
 
+const Forms = (state = initialState.forms, action) => {
+  switch (action.type) {
+    case Types.IS_VALIDATED_FORM: {
+      return {...state, ...action.payload};
+    }
+    default:
+      return state;
+  }
+};
+
 
 const appReducer =  combineReducers({
   NameEmail,
   Location,
   SocialNetworks,
-  CatImage
+  CatImage,
+  Forms
 });
 
 const rootReducer = (state, action) => {

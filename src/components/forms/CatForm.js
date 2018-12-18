@@ -22,11 +22,15 @@ class CatForm extends Component {
             kindOfPet
         });
 
+        const { action, addIsValidatedForm } = this.props;
+
         if(kindOfPet === 'котик') {
-            this.props.action(imageSrc);
+            action(imageSrc);
+            addIsValidatedForm({4: true});
             this.setState({ isCat: true});
         } else {
             this.setState({ isCat: false});
+            addIsValidatedForm({4: false});
         }
     }
 

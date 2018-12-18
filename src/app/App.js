@@ -26,18 +26,19 @@ class App extends Component {
       addNameEmail,
       addCatImage,
       addSocialNetworks,
-      addLocation} = this.props;
+      addLocation,
+      addIsValidatedForm } = this.props;
     const { activeForm } = this.state;
 
     switch (activeForm) {
       case 1:
-        return <NameEmailForm name={name} email={email} action={addNameEmail} />
+        return <NameEmailForm name={name} email={email} action={addNameEmail} addIsValidatedForm={addIsValidatedForm}/>
       case 2:
-        return <LocationForm country={country} city={city} action={addLocation}/>
+        return <LocationForm country={country} city={city} action={addLocation} addIsValidatedForm={addIsValidatedForm}/>
       case 3:
-        return <SocialProfileForm socialNetworks={socialNetworks} action={addSocialNetworks} />
+        return <SocialProfileForm socialNetworks={socialNetworks} action={addSocialNetworks} addIsValidatedForm={addIsValidatedForm}/>
       case 4:
-        return <CatForm catImage={catImage} action={addCatImage} />
+        return <CatForm catImage={catImage} action={addCatImage} addIsValidatedForm={addIsValidatedForm}/>
       case 5:
         return <FinalScreen  {...this.props} goOverAgain={this.goOverAgain} />
       default:
@@ -46,7 +47,10 @@ class App extends Component {
   }
 
   goToForm = (index) => {
-    if (index >= 1 && index <= 5)
+    const { forms } = this.props;
+    const { activeForm } = this.state;
+
+    if( forms[activeForm] && activeForm + 1 === index && index >= 1 && index <= 5)
       this.setState({ activeForm: index });
   }
 
@@ -57,13 +61,14 @@ class App extends Component {
 
 
   render() {
+    const { forms } = this.props;
     const { activeForm } = this.state;
 
     return (
       <div className='app'>
         {
           activeForm !== 5 &&
-          <Pagination totalPages={4} activeStep={activeForm} onClick={this.goToForm} />
+          <Pagination totalPages={4} activeStep={activeForm} forms={forms} onClick={this.goToForm} />
         }
         <div className='forms'>
           {this.getActiveForm()}
@@ -99,7 +104,8 @@ function mapStateToProps(state) {
     country: state.Location.country,
     city: state.Location.city,
     socialNetworks: state.SocialNetworks,
-    catImage: state.CatImage
+    catImage: state.CatImage,
+    forms: state.Forms
   };
 }
 

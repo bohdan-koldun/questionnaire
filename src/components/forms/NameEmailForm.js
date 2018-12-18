@@ -24,11 +24,18 @@ class NameEmailForm extends Component {
             this.setState({ validName: validateName(value) });
     }
 
-    componentDidUpdate() {
-        const { action } = this.props;
+    componentDidUpdate(prevProps, prevState) {
         const { name, email, validName, validEmail } = this.state;
-        if(validName && validEmail)
-            action(name, email);
+        const { action, addIsValidatedForm } = this.props;
+
+        if(prevState.name !== name || prevState.email !== email) {
+            if(validName && validEmail) {
+                action(name, email);
+                addIsValidatedForm({1: true});
+            } else {
+                addIsValidatedForm({1: false});
+            }   
+        }   
     }
   
 

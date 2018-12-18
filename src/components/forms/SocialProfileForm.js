@@ -20,10 +20,21 @@ class SocialProfileForm extends Component {
         });
     }
 
-    componentDidUpdate() {
-        const { action } = this.props;
-        action(this.state);
+
+    componentDidUpdate(prevProps, prevState) {
+        const { country, city} = this.state;
+        const { action, addIsValidatedForm } = this.props;
+
+        if(JSON.stringify(this.state) !== JSON.stringify(prevState)) {
+            if(this.state) {
+                action(this.state);
+                addIsValidatedForm({3: true});
+            } else {
+                addIsValidatedForm({3: false});
+            }   
+        }   
     }
+
 
     render() {
         const {

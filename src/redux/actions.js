@@ -19,5 +19,9 @@ export default {
 
   clearStore: () => {
     return { type: Types.GO_OVER_AGAIN };
+  },
+
+  addIsValidatedForm: (formState) => {
+    return { type: Types.IS_VALIDATED_FORM, payload: formState };
   }
 }

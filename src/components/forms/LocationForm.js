@@ -16,7 +16,8 @@ class LocationForm extends Component {
             countryKey: countryKey, 
             city: city, 
             cityKey: cityKey, 
-            filteredCities: this.filterCities(countryKey)}
+            filteredCities: this.filterCities(countryKey),
+        };
     }
 
     onChangeCountry = (key) => {
@@ -47,10 +48,18 @@ class LocationForm extends Component {
         return filteredCities;
     }
 
-    componentDidUpdate() {
-        const { action } = this.props;
+    componentDidUpdate(prevProps, prevState) {
         const { country, city} = this.state;
-        action(country, city);
+        const { action, addIsValidatedForm } = this.props;
+
+        if(prevState.country !== country || prevState.city !== city) {
+            if(country && city) {
+                action(country, city);
+                addIsValidatedForm({2: true});
+            } else {
+                addIsValidatedForm({2: false});
+            }   
+        }   
     }
   
 
