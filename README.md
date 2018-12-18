@@ -2,6 +2,8 @@
 # Questionnaire Test Task 
 https://bohdan-koldun.github.io/questionnaire
 
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshot-cat-1.jpg)
+
 In the project directory, you can run:
 
 ### `npm start` or `yarn start`
