@@ -5,7 +5,19 @@ import Cities from 'assets/json/cities.json';
 import './Forms.scss';
 
 class LocationForm extends Component {
-    state = { country: '', countryKey: '', city: '', cityKey: '', filteredCities: {} }
+    constructor(props) {
+        super(props);
+        const { country, city } = this.props;
+        const countryKey = Object.keys(Countries).find(key => Countries[key] === country);
+        const cityKey = Object.keys(Cities).find(key => Cities[key].name === city);
+
+        this.state = { 
+            country: country, 
+            countryKey: countryKey, 
+            city: city, 
+            cityKey: cityKey, 
+            filteredCities: this.filterCities(countryKey)}
+    }
 
     onChangeCountry = (key) => {
         this.setState({
@@ -14,7 +26,7 @@ class LocationForm extends Component {
         });
 
         if(key)
-          this.filterCities(key);
+           this.setState({filteredCities: this.filterCities(key)});
     }
 
     onChangeCity = (key) => {
@@ -31,7 +43,8 @@ class LocationForm extends Component {
             if(Cities[key].country == countryKey)
                 filteredCities[key] =  Cities[key].name;
         });
-        this.setState({filteredCities});
+
+        return filteredCities;
     }
 
     componentDidUpdate() {
@@ -42,7 +55,7 @@ class LocationForm extends Component {
   
 
     render() {
-        const { country, city, countryKey, cityKey, filteredCities } = this.state;
+        const { countryKey, cityKey, filteredCities } = this.state;
         return (
             <form>
                 <h2>2. Выберите страну и город</h2>
