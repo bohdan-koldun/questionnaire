@@ -3,13 +3,14 @@
 .image-picker {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 
     img {
         box-sizing: border-box;
-        width: 150px;
-        height: 150px;
+        width: 165px;
+        height: 100%;
         margin: 8px;
         border-radius: 2px;
     }  

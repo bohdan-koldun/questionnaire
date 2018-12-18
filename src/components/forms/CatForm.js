@@ -4,9 +4,13 @@ import './Forms.scss';
 
 const imageList = [
   { imageSrc: require('assets/pictures/cat1.jpg'), kindOfPet: 'котик' },
+  { imageSrc: require('assets/pictures/dog1.jpg'), kindOfPet: 'собачка' },
   { imageSrc: require('assets/pictures/cat2.jpg'), kindOfPet: 'котик' },
+  { imageSrc: require('assets/pictures/hamster1.jpg'), kindOfPet: 'хомячок' },
   { imageSrc: require('assets/pictures/cat3.jpg'), kindOfPet: 'котик' },
-  { imageSrc: require('assets/pictures/dog4.jpg'), kindOfPet: 'собачка' }
+  { imageSrc: require('assets/pictures/cat4.jpg'), kindOfPet: 'котик' },
+  { imageSrc: require('assets/pictures/raccoon1.jpg'), kindOfPet: 'енот' },
+  { imageSrc: require('assets/pictures/dog2.jpg'), kindOfPet: 'собачка' },
 ]
 
 class CatForm extends Component {
@@ -47,7 +51,7 @@ class CatForm extends Component {
                 />
                 {
                     isCat === false && selectedImage !== '' &&
-                    <span className='error'>Это {kindOfPet}! А нужен котик! Выберите котика.</span>
+                    <p className='error cat-form-error'>Это {kindOfPet}! А нужен котик! Выберите котика.</p>
                 }
             </form>
         );

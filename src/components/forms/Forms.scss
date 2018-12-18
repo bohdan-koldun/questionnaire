@@ -49,6 +49,11 @@ form {
         }
     }
 
+    .cat-form-error {
+        width: 100%;
+        text-align: left;
+    }
+    
     @media screen and (max-width: 600px) {
         .social-input-group {
             justify-content: flex-start;

@@ -53,7 +53,7 @@ class App extends Component {
 
     if( isAForm && 
         (activeForm >= index || 
-          (forms[activeForm] && (activeForm + 1 === index || forms[index] )))) {
+          (forms[activeForm] && (activeForm + 1 === index || forms[index] || forms[index-1])))) {
             this.setState({ activeForm: index });
           }
   }
