@@ -28,8 +28,8 @@ class SocialProfileForm extends Component {
         });
     }
 
-    validateSocialProfileForm = () => {
-        const { addIsValidatedForm } = this.props;
+    validateSocialProfileForm = (nextProps) => {
+        const { addIsValidatedForm, socialNetworks } = nextProps ? nextProps : this.props;
         const {
             facebook,
             isFacebook,
@@ -38,7 +38,7 @@ class SocialProfileForm extends Component {
             twitter,
             isTwitter,
             odnoklassniki,
-            isOdnoklassniki } = this.state;
+            isOdnoklassniki } = socialNetworks; 
 
         let error = (isFacebook || isVkontakte || isTwitter || isOdnoklassniki);
 
@@ -137,7 +137,7 @@ class SocialProfileForm extends Component {
     componentWillReceiveProps(nextProps) {
         const { formState } = nextProps;
         if (!formState.valid && formState.countAttemptNext > 0)
-            this.validateSocialProfileForm();
+            this.validateSocialProfileForm(nextProps);
     }
 
     componentDidMount() {

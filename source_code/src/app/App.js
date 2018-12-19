@@ -88,7 +88,7 @@ class App extends Component {
     const { activeForm, allAttemptNextFormClick} = this.state;
     const isAForm = index >= 1 && index <= 5;
     const isValidActiveForm = forms[activeForm].valid;
-    const isAvailableNextAttemptForm = activeForm + 1 === index || forms[index].valid || !forms[index-1] || forms[index-1].valid;
+    const isAvailableNextAttemptForm = activeForm + 1 === index || !forms[index-1] || forms[index-1].valid || forms[index].valid;
 
     if (isAForm && (activeForm >= index || (isValidActiveForm && isAvailableNextAttemptForm)))
       this.setState({ activeForm: index });

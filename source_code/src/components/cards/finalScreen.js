@@ -19,7 +19,7 @@ class FinalScreen extends Component {
                     <div>
                         <h1>{name}</h1>
                         <p>{email}</p>
-                        <p className='location'>{country}, {city}</p>
+                        <p className='location'>{country}, {city ? city : country}</p>
                         <div className='social-networks'>
                           { socialNetworks.isFacebook && <p><span>Facebook:</span>{socialNetworks.facebook}</p> }
                           { socialNetworks.isVkontakte && <p><span>Вконтакте:</span>{socialNetworks.vkontakte}</p> }

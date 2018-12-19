@@ -39,16 +39,16 @@ class CatForm extends Component {
         }
     }
 
-    validateCatForm = () => {
+    validateCatForm = (nextProps) => {
         const { addIsValidatedForm } = this.props;
-        const { kindOfPet } = this.state;
+        const { kindOfPet } = nextProps ? nextProps : this.props;
 
         if (kindOfPet === 'котик') {
             addIsValidatedForm({ 4: true });
             this.setState({ isCat: true });
-        } else {
-            this.setState({ isCat: false });
+        } else {    
             addIsValidatedForm({ 4: false });
+            this.setState({ isCat: false });
         }
     }
 
@@ -56,8 +56,7 @@ class CatForm extends Component {
         const { formState } = nextProps;
 
         if (!formState.valid && formState.countAttemptNext > 0)
-            this.validateCatForm();
-
+            this.validateCatForm(nextProps);
     }
 
     componentDidMount() {
