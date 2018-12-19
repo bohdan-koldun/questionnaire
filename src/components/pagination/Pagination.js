@@ -8,7 +8,7 @@ class Pagination extends Component {
         for (let i = 1; i <= totalPages; i++) {
             let classButton = '';
             if(activeStep === i) classButton += 'active ';
-            if(forms[i]) classButton += 'available';
+            if(forms[i].valid) classButton += 'available';
             
             buttons.push(
                 <button

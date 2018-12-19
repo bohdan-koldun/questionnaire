@@ -3,6 +3,7 @@
 .select {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     margin: 8px 0;
     width: 100%;
     
@@ -58,4 +59,8 @@
    span:hover {
      background-color: $grey;
   }
+
+  .select-error {
+    border: 1px solid #ff0000 !important;
   }
+}

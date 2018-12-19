@@ -7,3 +7,9 @@ export function validateName(name) {
     const regExp = /^[а-яА-Я ]+$/;
     return regExp.test(name);
 }
+
+export function validateUrl(url) {
+    const regExp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+    return regExp.test(url);
+}
+

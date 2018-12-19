@@ -13,7 +13,7 @@ import FinalScreen from 'components/cards/finalScreen';
 import './App.scss';
 
 class App extends Component {
-  state = { activeForm: 1, counterClickNextForm: 0 }
+  state = { activeForm: 1, allAttemptNextFormClick: 0 }
 
   getActiveForm = () => {
     const {
@@ -27,35 +27,74 @@ class App extends Component {
       addCatImage,
       addSocialNetworks,
       addLocation,
-      addIsValidatedForm } = this.props;
+      addIsValidatedForm,
+      forms } = this.props;
     const { activeForm } = this.state;
 
     switch (activeForm) {
       case 1:
-        return <NameEmailForm name={name} email={email} action={addNameEmail} addIsValidatedForm={addIsValidatedForm}/>
+        return <NameEmailForm
+          name={name}
+          email={email}
+          action={addNameEmail}
+          addIsValidatedForm={addIsValidatedForm}
+          formState={forms[1]}
+          activeForm={activeForm}
+        />
       case 2:
-        return <LocationForm country={country} city={city} action={addLocation} addIsValidatedForm={addIsValidatedForm}/>
+        return <LocationForm
+          country={country}
+          city={city}
+          action={addLocation}
+          addIsValidatedForm={addIsValidatedForm}
+          formState={forms[2]}
+          activeForm={activeForm}
+        />
       case 3:
-        return <SocialProfileForm socialNetworks={socialNetworks} action={addSocialNetworks} addIsValidatedForm={addIsValidatedForm}/>
+        return <SocialProfileForm
+          socialNetworks={socialNetworks}
+          action={addSocialNetworks}
+          addIsValidatedForm={addIsValidatedForm}
+          formState={forms[3]}
+          activeForm={activeForm}
+        />
       case 4:
-        return <CatForm catImage={catImage} action={addCatImage} addIsValidatedForm={addIsValidatedForm}/>
+        return <CatForm
+          catImage={catImage}
+          action={addCatImage}
+          addIsValidatedForm={addIsValidatedForm}
+          formState={forms[4]}
+          activeForm={activeForm}
+        />
       case 5:
-        return <FinalScreen  {...this.props} goOverAgain={this.goOverAgain} />
+        return <FinalScreen
+          {...this.props}
+          goOverAgain={this.goOverAgain}
+        />
       default:
-        return <NameEmailForm name={name} email={email} action={addNameEmail} addIsValidatedForm={addIsValidatedForm}/>
+        return <NameEmailForm
+          name={name}
+          email={email}
+          action={addNameEmail}
+          addIsValidatedForm={addIsValidatedForm}
+          formState={forms[1]}
+          activeForm={activeForm}
+        />
     }
   }
 
   goToForm = (index) => {
-    const { forms } = this.props;
-    const { activeForm, counterClickNextForm } = this.state;
+    const { forms, countAttemptNextForm } = this.props;
+    const { activeForm, allAttemptNextFormClick} = this.state;
     const isAForm = index >= 1 && index <= 5;
+    const isValidActiveForm = forms[activeForm].valid;
+    const isAvailableNextAttemptForm = activeForm + 1 === index || forms[index].valid || !forms[index-1] || forms[index-1].valid;
 
-    if( isAForm && 
-        (activeForm >= index || 
-          (forms[activeForm] && (activeForm + 1 === index || forms[index] || forms[index-1])))) {
-            this.setState({ activeForm: index });
-    }
+    if (isAForm && (activeForm >= index || (isValidActiveForm && isAvailableNextAttemptForm)))
+      this.setState({ activeForm: index });
+
+    countAttemptNextForm(activeForm);
+    this.setState({ allAttemptNextFormClick: allAttemptNextFormClick +1 });
   }
 
   goOverAgain = () => {

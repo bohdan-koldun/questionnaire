@@ -27,7 +27,7 @@ class FinalScreen extends Component {
                           { socialNetworks.isOdnoklassniki && <p><span>Одноклассники:</span>{socialNetworks.odnoklassniki}</p> }
                         </div>
                     </div>
-                    <img src={catImage} alt='Котик' />
+                    <img src={catImage.src} alt='Котик' />
                 </div>
                 <Button kind='orange' onClick={goOverAgain}>
                     <span>Пройти заново</span>

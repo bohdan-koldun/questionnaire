@@ -5,7 +5,7 @@ class Select extends Component {
     state = { showDropdown: false }
 
     handlerClick = (event) => {
-        this.setState({ showDropdown: true});
+        this.setState({ showDropdown: true });
     }
 
     setWrapperRef = (node) => {
@@ -13,8 +13,8 @@ class Select extends Component {
     }
 
     handleClickOutside = (event) => {
-       if (this.inputRef && !this.inputRef.contains(event.target)) {
-               this.setState({ showDropdown: false });
+        if (this.inputRef && !this.inputRef.contains(event.target)) {
+            this.setState({ showDropdown: false });
         }
     }
 
@@ -24,17 +24,18 @@ class Select extends Component {
     }
 
     componentDidMount() {
-      document.addEventListener('mousedown', this.handleClickOutside);
+        document.addEventListener('mousedown', this.handleClickOutside);
     }
 
     componentWillUnmount() {
-      document.removeEventListener('mousedown', this.handleClickOutside);
+        document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     render() {
-        const { name, label, options, search, onChange, selectedKey} = this.props;
-        const { showDropdown} = this.state;
-     
+        const { name, label, options, search, onChange, selectedKey, error, disabled } = this.props;
+        const { showDropdown } = this.state;
+        const isError = error.length > 0;
+
         return (
             <div className='select' ref={this.setWrapperRef}>
                 <input
@@ -46,13 +47,16 @@ class Select extends Component {
                     onChange={() => onChange(selectedKey)}
                     autoComplete='off'
                     readOnly={!search}
+                    disabled={disabled}
+                    className={isError ? 'select-error' : ''}
                 />
-                <div className='select-dropdown' style={{display: showDropdown ? 'flex' : 'none'}}>
-                     {
-                         Object.keys(options).map( (key) => {
+                 {isError && <p className='error'>{error}</p>}
+                <div className='select-dropdown' style={{ display: showDropdown ? 'flex' : 'none' }}>
+                    {
+                        Object.keys(options).map((key) => {
                             return <span onClick={() => this.handleChoose(key)} key={options[key]} >{options[key]}</span>;
-                         })
-                     }
+                        })
+                    }
                 </div>
             </div>
         );
@@ -61,7 +65,8 @@ class Select extends Component {
 
 Select.defaultProps = {
     options: [],
-    search: false
+    search: false,
+    disabled: false
 };
 
 export default Select;

@@ -21,7 +21,11 @@ export default {
     return { type: Types.GO_OVER_AGAIN };
   },
 
-  addIsValidatedForm: (formState) => {
-    return { type: Types.IS_VALIDATED_FORM, payload: formState };
+  addIsValidatedForm: (isFormValid) => {
+    return { type: Types.IS_VALIDATED_FORM, payload: isFormValid };
+  },
+
+  countAttemptNextForm: (formIndex) => {
+    return { type: Types.COUNT_ATTEMPT_NEXT_FORM, payload: formIndex };
   }
 }

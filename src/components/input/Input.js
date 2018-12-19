@@ -3,7 +3,7 @@ import './Input.scss';
 
 class Input extends Component {
     render() {
-        const { type, value, name, error, placeholder, onChange, className } = this.props;
+        const { type, value, name, error, placeholder, onChange, className, style } = this.props;
         const isError = error.length > 0;
         const classInput = isError ?  (!className ? 'input-error' : 'input-error ' + className) : className;
 
@@ -16,8 +16,9 @@ class Input extends Component {
                     onChange={onChange}
                     placeholder={placeholder}
                     className={classInput}
+                    style={style}
                 />
-                {isError && <span className='error'>{error}</span>}
+                {isError  && <span className='error'>{error}</span>}
             </div>
         );
     }
@@ -26,5 +27,5 @@ class Input extends Component {
 Input.defaultProps = {
     type: 'text'
 };
-
+ 
 export default Input;

@@ -19,25 +19,47 @@ class NameEmailForm extends Component {
 
         if (name === 'email')
             this.setState({ validEmail: validateEmail(value) });
-    
-        if (name === 'name') 
+
+        if (name === 'name')
             this.setState({ validName: validateName(value) });
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { name, email, validName, validEmail } = this.state;
-        const { action, addIsValidatedForm } = this.props;
+        const { action, addIsValidatedForm, formState } = this.props;
 
-        if(prevState.name !== name || prevState.email !== email) {
-            if(validName && validEmail) {
+        if (prevState.name !== name ||
+            prevState.email !== email ||
+            formState.countAttemptNext !== prevProps.formState.countAttemptNext) {
+            if (validName && validEmail) {
                 action(name, email);
-                addIsValidatedForm({1: true});
+                addIsValidatedForm({ 1: true });
             } else {
-                addIsValidatedForm({1: false});
-            }   
-        }   
+                addIsValidatedForm({ 1: false });
+            }
+        }
     }
-  
+
+    componentWillReceiveProps(nextProps) {
+        const { formState } = this.props;
+        const { name, email } = this.state;
+
+        if (!formState.valid && formState.countAttemptNext > 0) {
+            this.setState({ validEmail: validateEmail(email) });
+            this.setState({ validName: validateName(name) });
+        }
+    }
+    
+    componentDidMount() {
+        const { formState } = this.props;
+        const { name, email } = this.state;
+
+        if (!formState.valid && formState.countAttemptNext > 0) {
+            this.setState({ validEmail: validateEmail(email) });
+            this.setState({ validName: validateName(name) });
+        }
+    }
+
 
     render() {
         const { name, email, validName, validEmail } = this.state;

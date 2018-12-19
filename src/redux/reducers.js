@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import Types from './constants';
+import storage from 'redux-persist/lib/storage'
 
 const initialState = {
   nameEmailData: {
@@ -20,14 +21,28 @@ const initialState = {
     odnoklassniki: '',
     isOdnoklassniki: false
   },
-  catImage: '',
+  catImage: {
+    src: '',
+    kindOfPet: ''
+  },
   forms: {
-    1:  false,
-    2:  false,
-    3:  false,
-    4:  false,
+    1: {
+      valid: false,
+      countAttemptNext: 0
+    },
+    2: {
+      valid: false,
+      countAttemptNext: 0
+    },
+    3: {
+      valid: false,
+      countAttemptNext: 0
+    },
+    4: {
+      valid: false,
+      countAttemptNext: 0
+    }
   }
-
 };
 
 const NameEmail = (state = initialState.nameEmailData, action) => {
@@ -70,7 +85,22 @@ const CatImage = (state = initialState.catImage, action) => {
 const Forms = (state = initialState.forms, action) => {
   switch (action.type) {
     case Types.IS_VALIDATED_FORM: {
-      return {...state, ...action.payload};
+      const key = Object.keys(action.payload)[0];
+      state[key].valid = action.payload[key];
+      return state;
+    }
+    case Types.COUNT_ATTEMPT_NEXT_FORM: {
+      state[action.payload].countAttemptNext++;
+      return state;
+    }
+    case Types.GO_OVER_AGAIN: {
+      Object.keys(initialState.forms).forEach((key => {
+        initialState.forms[key] = {
+          valid: false,
+          countAttemptNext: 0
+        }
+      }))
+      return { ...initialState.forms };
     }
     default:
       return state;
@@ -78,18 +108,22 @@ const Forms = (state = initialState.forms, action) => {
 };
 
 
-const appReducer =  combineReducers({
+const appReducer = combineReducers({
+  Forms,
   NameEmail,
   Location,
   SocialNetworks,
-  CatImage,
-  Forms
+  CatImage
 });
 
 const rootReducer = (state, action) => {
   if (action.type === Types.GO_OVER_AGAIN) {
+    Object.keys(state).forEach(key => {
+      storage.removeItem(`persist:${key}`);
+    });
     state = undefined;
   }
+
 
   return appReducer(state, action)
 }
