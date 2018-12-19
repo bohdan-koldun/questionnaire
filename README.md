@@ -11,7 +11,7 @@ Demo: https://bohdan-koldun.github.io/questionnaire
 git clone https://github.com/bohdan-koldun/questionnaire.git
 
 # Go inside the directory
-cd source_code
+cd questionnaire/source_code
 
 # Install dependencies
 yarn (or npm install)
