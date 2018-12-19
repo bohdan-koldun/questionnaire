@@ -2,7 +2,7 @@
 # Questionnaire Test Task 
 https://bohdan-koldun.github.io/questionnaire
 
-![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshot-cat-1.jpg)
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-5.jpg)
 
 ## Quick Start
 
@@ -27,3 +27,11 @@ yarn build (or npm run build)
 * React.js
 * Redux.js
 * Sass
+
+## Screenshots:
+
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-1.jpg)
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-2.jpg)
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-3.jpg)
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-4.jpg)
+![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-5.jpg)
