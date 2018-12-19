@@ -22,3 +22,8 @@ yarn start (or npm start)
 # Build for production
 yarn build (or npm run build)
 ```
+## Used frameworks / technologies:
+
+* React.js
+* Redux.js
+* Sass
