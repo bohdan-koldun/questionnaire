@@ -8,7 +8,7 @@ Demo: https://bohdan-koldun.github.io/questionnaire
 
 ```bash
 # Clone the repository
-git clone https://github.com/bohdan-koldun/questionnaire.gitttps://github.com/bohdan-koldun/image-uploader-by-url.git
+git clone https://github.com/bohdan-koldun/questionnaire.git
 
 # Go inside the directory
 cd source_code
