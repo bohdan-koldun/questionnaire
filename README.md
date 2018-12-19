@@ -1,6 +1,6 @@
 
 # Questionnaire Test Task 
-https://bohdan-koldun.github.io/questionnaire
+Demo: https://bohdan-koldun.github.io/questionnaire
 
 ![Иллюстрация к проекту](https://github.com/bohdan-koldun/questionnaire/blob/master/screenshots/screenshot-cat-5.jpg)
 
