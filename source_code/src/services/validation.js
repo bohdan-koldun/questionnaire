@@ -4,7 +4,7 @@ export function validateEmail(email) {
 }
 
 export function validateName(name) {
-    const regExp = /^[а-яА-Я ]+$/;
+    const regExp = /^[а-яА-ЯёщьюяґєіїЁЩЬЮЯҐЄІЇ ]+$/;
     return regExp.test(name);
 }
 

@@ -70,7 +70,7 @@ class NameEmailForm extends Component {
                     name='name'
                     value={name}
                     placeholder='Имя'
-                    error={validName === false ? 'Имя должно состоять из букв только русского алфавита и пробела' : ''}
+                    error={validName === false ? 'Имя должно состоять из букв русского или украинского алфавита' : ''}
                     onChange={this.handleInputChange}
                 />
                 <Input
