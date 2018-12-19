@@ -29,7 +29,8 @@ class SocialProfileForm extends Component {
     }
 
     validateSocialProfileForm = (nextProps) => {
-        const { addIsValidatedForm, socialNetworks } = nextProps ? nextProps : this.props;
+        const { addIsValidatedForm } = this.props;
+        const { socialNetworks } = nextProps ? nextProps : this.props;
         const {
             facebook,
             isFacebook,
@@ -38,7 +39,7 @@ class SocialProfileForm extends Component {
             twitter,
             isTwitter,
             odnoklassniki,
-            isOdnoklassniki } = socialNetworks; 
+            isOdnoklassniki } = socialNetworks ? socialNetworks : this.state;
 
         let error = (isFacebook || isVkontakte || isTwitter || isOdnoklassniki);
 
@@ -47,40 +48,41 @@ class SocialProfileForm extends Component {
             this.setState({ error: true });
         }
         else {
-            this.setState({ error: false });
             let counterFalse = 0;
-            if (isFacebook && !validateUrl(facebook)) {
+            if (isFacebook &&  !validateUrl(facebook)) {
                 counterFalse++;
-                this.setState({ errorFacebook: 'Ссылка не корректна' });
+                this.setState({ errorFacebook: facebook ? 'Ссылка не корректна': ''});
             } else {
                 this.setState({ errorFacebook: '' });
             }
 
             if (isVkontakte && !validateUrl(vkontakte)) {
                 counterFalse++;
-                this.setState({ errorVkontakte: 'Ссылка не корректна' });
+                this.setState({ errorVkontakte: vkontakte ? 'Ссылка не корректна': ''});
             } else {
                 this.setState({ errorVkontakte: '' });
             }
 
             if (isTwitter && !validateUrl(twitter)) {
                 counterFalse++;
-                this.setState({ errorTwitter: 'Ссылка не корректна' });
+                this.setState({ errorTwitter: twitter ? 'Ссылка не корректна': '' });
             } else {
                 this.setState({ errorTwitter: '' });
             }
 
             if (isOdnoklassniki && !validateUrl(odnoklassniki)) {
                 counterFalse++;
-                this.setState({ errorOdnoklassniki: 'Ссылка не корректна' });
+                this.setState({ errorOdnoklassniki: odnoklassniki ? 'Ссылка не корректна': '' });
             } else {
                 this.setState({ errorOdnoklassniki: '' });
             }
 
             if (counterFalse > 0) {
                 addIsValidatedForm({ 3: false });
+                this.setState({ error: true });
             } else {
                 addIsValidatedForm({ 3: true });
+                this.setState({ error: false });
             }
         }
     }
@@ -99,39 +101,29 @@ class SocialProfileForm extends Component {
             odnoklassniki,
             isOdnoklassniki } = this.state;
 
+        const socialNetworks = {
+            facebook,
+            isFacebook,
+            vkontakte,
+            isVkontakte,
+            twitter,
+            isTwitter,
+            odnoklassniki,
+            isOdnoklassniki
+        };
+
         if (prevState.facebook !== facebook ||
             prevState.vkontakte !== vkontakte ||
             prevState.twitter !== twitter ||
-            prevState.odnoklassniki !== odnoklassniki) {
-            action({
-                facebook,
-                isFacebook,
-                vkontakte,
-                isVkontakte,
-                twitter,
-                isTwitter,
-                odnoklassniki,
-                isOdnoklassniki
-            });
-            this.validateSocialProfileForm();
-        }
-
-        
-        if (prevState.isFacebook !== isFacebook ||
+            prevState.odnoklassniki !== odnoklassniki ||
+            prevState.isFacebook !== isFacebook ||
             prevState.isVkontakte !== isVkontakte ||
             prevState.isTwitter !== isTwitter ||
             prevState.isOdnoklassniki !== isOdnoklassniki) {
-            action({
-                facebook,
-                isFacebook,
-                vkontakte,
-                isVkontakte,
-                twitter,
-                isTwitter,
-                odnoklassniki,
-                isOdnoklassniki
-            });
+            action(socialNetworks);
+            this.validateSocialProfileForm({socialNetworks});
         }
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -246,7 +238,7 @@ class SocialProfileForm extends Component {
                         />
                     }
                 </div>
-                {error && <p className='error'>Выберите и вкажите хотя бы одну соцсеть!</p>}
+                {error && <p className='error'>Выберите хотя бы одну соцсеть и корректно укажите все выбранные!</p>}
             </form>
         );
     }
